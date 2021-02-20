@@ -38,11 +38,12 @@ The schema defines the index fields
  }
 }
 ```
-We can now index some data
+We can now index some data  
 
     $ curl -XPOST "http://localhost:9200/thessaloniki/floating-cars" -H "Content-Type: application/json" -d @fcd-data.json
 
-sending the data as a JSON file, e.g. 
+sending the data as a JSON file to the elasticsearch docker container. In case the container is not a local container we must 
+use its service name or hostname. 
 
 ``` 
 {
