@@ -7,6 +7,7 @@
                      },
        "location" : {"type": "geo_point"},
        "speed" : {"type": "double"},
+       "orientation" : {"type": "double"},
        "count" : {"type": "integer"}
    }
  }
