@@ -9,7 +9,8 @@ echo `date` $0
     echo XXX $0 initialisation finished, service is healthy
     curl -XPUT "localhost:9200/thessaloniki"
     echo XXX $0 index created
-    curl -XPUT "localhost:9200/thessaloniki/_mapping/floating-cars?include_type_name=true" -H "Content-Type: application/json" -d "@/fcd-mapping.json"
+    sleep 5
+    curl -H "Content-Type: application/json" -XPUT "http://localhost:9200/thessaloniki/_mapping/floating-cars?include_type_name=true"  -d @fcd-mapping.json
     echo XXX $0 mapping schema defined
 ) &
     
