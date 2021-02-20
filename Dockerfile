@@ -15,9 +15,12 @@ FROM elasticsearch:7.10.1
 
 MAINTAINER Luigi Selmi <luigi@datiaperti.it>
 
-WORKDIR /
-COPY healthcheck /
-COPY fcd-mapping.json /
-COPY elasticsearch-startup.sh /
+# copy files in /usr/share/elasticsearch
+COPY healthcheck .
+COPY fcd-mapping.json .
+COPY elasticsearch-startup.sh .
 
-CMD [ "/elasticsearch-startup.sh" ]
+# elasticsearch cannot be run by root
+USER elasticsearch
+
+ENTRYPOINT ["./elasticsearch-startup.sh" ]
