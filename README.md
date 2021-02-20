@@ -12,8 +12,13 @@ To attach to the running container execute the command
 
     $ docker exec -it elasticsearch bash
 
-The script elasticsearch-startup.sh, included in the Dockerfile creates an index "thessaloniki" and sends a schema, aka mapping, as a JSON
+The script elasticsearch-startup.sh, included in the Dockerfile, creates an index "thessaloniki" and sends a schema, aka mapping, as a JSON
 file
+
+    $ curl -XPUT "http://localhost:9200/thessaloniki/_mapping/floating-cars?include_type_name=true" -H "Content-Type: application/json" -d @fcd-mapping.json
+
+The schema defines the index fields
+ 
 ```
 {
   "floating-cars" : {
@@ -24,6 +29,7 @@ file
                      },
        "location" : {"type": "geo_point"},
        "speed" : {"type": "double"},
+       "orientation" : {"type": "double"},
        "count" : {"type": "integer"}
    }
  }
