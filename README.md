@@ -38,11 +38,11 @@ The schema defines the index fields
  }
 }
 ```
-Once the container is running we can index some data
+We can now index some data
 
     $ curl -XPOST "http://localhost:9200/thessaloniki/floating-cars" -H "Content-Type: application/json" -d @fcd-data.json
 
-sending the data as a JSON file 
+sending the data as a JSON file, e.g. 
 
 ``` 
 {
@@ -60,3 +60,9 @@ sending the data as a JSON file
 Finally, we can send a query, for example to know the number of documents with the parameter geohsh=sq0r
 
     $ curl "http://localhost:9200/thessaloniki/floating-cars/_count?q=geohash:sq0r"
+
+and get the response
+
+```
+{"count":1,"_shards":{"total":1,"successful":1,"skipped":0,"failed":0}}
+```
