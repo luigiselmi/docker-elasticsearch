@@ -11,3 +11,23 @@ To run a container in detached mode execute the command
 To attach to the running container execute the command
 
     $ docker exec -it elasticsearch bash
+
+The script elasticsearch-startup.sh, included in the Dockerfile creates an index "thessaloniki" and sends a schema, aka mapping, as a JSON
+file
+```
+{
+  "floating-cars" : {
+    "properties" : {
+       "geohash" : {"type": "text"},
+       "timestamp" : {"type": "date",
+                      "format": "yyyy-MM-dd HH:mm:ss"
+                     },
+       "location" : {"type": "geo_point"},
+       "speed" : {"type": "double"},
+       "count" : {"type": "integer"}
+   }
+ }
+}
+```
+
+ 
