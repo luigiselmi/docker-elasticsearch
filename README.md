@@ -58,7 +58,7 @@ use its service name or hostname.
   "count" : "1"
 }
 ```
-Finally, we can send a query, for example to know the number of documents with the parameter geohsh=sq0r
+Finally, we can send a query, for example to know the number of documents with the parameter geohash=sq0r
 
     $ curl "http://localhost:9200/thessaloniki/floating-cars/_count?q=geohash:sq0r"
 
