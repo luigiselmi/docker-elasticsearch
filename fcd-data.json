@@ -5,7 +5,7 @@
       "lat": 42.12,
       "lon": 12.25
     },
-  "speed" : "42.5",
-  "orientation" : "180.5",
-  "count" : "1"
+  "speed" : 42.50,
+  "orientation" : 180.5,
+  "count" : 1
 }
