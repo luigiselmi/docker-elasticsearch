@@ -1,0 +1,20 @@
+{
+  "settings" : {
+     "number_of_shards": 1,
+     "number_of_replicas": 1
+  },
+  "mappings" : {
+     "fcd" : {
+        "properties" : {
+           "geohash" : {"type": "text"},
+           "timestamp" : {"type": "date",
+                      "format": "yyyy-MM-dd HH:mm:ss"
+            },
+           "location" : {"type": "geo_point"},
+           "speed" : {"type": "double"},
+           "orientation" : {"type": "double"},
+           "count" : {"type": "integer"}
+     }
+   }
+  }
+}
