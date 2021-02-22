@@ -17,7 +17,7 @@ MAINTAINER Luigi Selmi <luigi@datiaperti.it>
 
 # copy files in /usr/share/elasticsearch
 COPY healthcheck .
-COPY fcd-mapping.json .
+COPY thessaloniki-settings.json .
 COPY elasticsearch-startup.sh .
 
 # elasticsearch cannot be run by root
