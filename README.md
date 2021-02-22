@@ -16,31 +16,39 @@ The script elasticsearch-startup.sh, included in the Dockerfile, creates an inde
 
     # curl -XPUT "http://localhost:9200/thessaloniki"
 
-and sends a schema, aka mapping, as a JSON file
+and sends the settings, such as the number of shards in which we split the index and the number of replicas of the shards. The file contains 
+also the mappings, that is the fields of the index.
 
     # curl -XPUT "http://localhost:9200/thessaloniki/_mapping/floating-cars?include_type_name=true" -H "Content-Type: application/json" -d @fcd-mapping.json
 
-The schema defines the index fields
+The file contains the mappings as well, that is the fields of the index.
  
 ```
 {
-  "floating-cars" : {
-    "properties" : {
-       "geohash" : {"type": "text"},
-       "timestamp" : {"type": "date",
+  "settings" : {
+     "number_of_shards": 1,
+     "number_of_replicas": 1
+  },
+  "mappings" : {
+     "fcd" : {
+        "properties" : {
+           "geohash" : {"type": "text"},
+           "timestamp" : {"type": "date",
                       "format": "yyyy-MM-dd HH:mm:ss"
-                     },
-       "location" : {"type": "geo_point"},
-       "speed" : {"type": "double"},
-       "orientation" : {"type": "double"},
-       "count" : {"type": "integer"}
+            },
+           "location" : {"type": "geo_point"},
+           "speed" : {"type": "double"},
+           "orientation" : {"type": "double"},
+           "count" : {"type": "integer"}
+     }
    }
- }
+  }
 }
+
 ```
 We can now index some data  
 
-    $ curl -XPOST "http://localhost:9200/thessaloniki/floating-cars" -H "Content-Type: application/json" -d @fcd-data.json
+    $ curl -XPOST "http://localhost:9200/thessaloniki/_doc" -H "Content-Type: application/json" -d @fcd-data.json
 
 sending the data as a JSON file to the elasticsearch docker container. In case the container is not a local container we must 
 use its service name or hostname. 
@@ -53,14 +61,15 @@ use its service name or hostname.
       "lat": 42.12,
       "lon": 12.25
     },
-  "speed" : "42.5",
-  "orientation" : "180.5",
-  "count" : "1"
+  "speed" : 42.50,
+  "orientation" : 180.5,
+  "count" : 1
 }
+
 ```
 Finally, we can send a query, for example to know the number of documents with the parameter geohash=sq0r
 
-    $ curl "http://localhost:9200/thessaloniki/floating-cars/_count?q=geohash:sq0r"
+    $ curl "http://localhost:9200/thessaloniki/_count?q=geohash:sq0r"
 
 and get the response
 
