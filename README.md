@@ -72,3 +72,6 @@ and get the response
 ```
 {"count":1,"_shards":{"total":1,"successful":1,"skipped":0,"failed":0}}
 ```
+The service can be started using the docker-compose file
+
+    $ docker-compose up -d
