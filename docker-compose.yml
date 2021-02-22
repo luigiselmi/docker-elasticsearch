@@ -1,0 +1,16 @@
+version: '3.9'
+services:
+    elasticsearch:
+        image: lgslm/elasticsearch:v1.0.0
+        hostname: elasticsearch
+        environment:
+            - discovery.type=single-node
+        ports:
+            - "9200:9200"
+            - "9300:9300"
+        networks:
+          - kafka-clients-net
+
+networks:
+        kafka-clients-net:
+            external: true
