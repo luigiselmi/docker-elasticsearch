@@ -12,14 +12,10 @@ To attach to the running container execute the command
 
     $ docker exec -it elasticsearch bash
 
-The script elasticsearch-startup.sh, included in the Dockerfile, creates an index "thessaloniki" 
+The script elasticsearch-startup.sh, included in the Dockerfile, creates an index "thessaloniki" and sends the settings, such as the number 
+of shards in which we split the index and the number of replicas of the shards
 
-    # curl -XPUT "http://localhost:9200/thessaloniki"
-
-and sends the settings, such as the number of shards in which we split the index and the number of replicas of the shards. The file contains 
-also the mappings, that is the fields of the index.
-
-    # curl -XPUT "http://localhost:9200/thessaloniki/_mapping/floating-cars?include_type_name=true" -H "Content-Type: application/json" -d @fcd-mapping.json
+    $ curl -XPUT "http://localhost:9200/thessaloniki?include_type_name=true" -H "Content-Type: application/json" -d @thessaloniki-settings.json
 
 The file contains the mappings as well, that is the fields of the index.
  
