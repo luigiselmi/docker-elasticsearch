@@ -1,0 +1,7 @@
+{
+  "query": {
+    "match": {
+      "geohash": "sq0r"
+    }
+  }
+}
