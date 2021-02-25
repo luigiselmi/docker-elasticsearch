@@ -63,9 +63,10 @@ use its service name or hostname.
 }
 
 ```
-Finally, we can send a query, for example to know the number of documents with the parameter geohash=sq0r
+Finally, we can send a query, for example to know the number of records with the parameter geohash=sx0* that covers the area 
+of Thessaloniki and Halkidiki
 
-    $ curl "http://localhost:9200/thessaloniki/_count?q=geohash:sq0r"
+    $ curl "http://localhost:9200/thessaloniki/_count?q=geohash:sx0*"
 
 and get the response
 
