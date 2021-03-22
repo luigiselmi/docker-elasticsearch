@@ -51,7 +51,7 @@ use its service name or hostname.
 
 ``` 
 {
-  "geohash" : "sq0r",
+  "geohash" : "sx0r",
   "timestamp" : "2021-02-20 18:00:00",
   "location" : {
       "lat": 42.12,
