@@ -1,7 +1,7 @@
-version: '3.2'
+version: '2.2'
 services:
   es01:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
     container_name: es01
     environment:
       - node.name=es01
@@ -19,9 +19,9 @@ services:
     ports:
       - 9200:9200
     networks:
-      - elastic
+      - kafka-clients-net
   es02:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
     container_name: es02
     environment:
       - node.name=es02
@@ -37,9 +37,9 @@ services:
     volumes:
       - data02:/usr/share/elasticsearch/data
     networks:
-      - elastic
+      - kafka-clients-net
   es03:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
     container_name: es03
     environment:
       - node.name=es03
@@ -55,16 +55,13 @@ services:
     volumes:
       - data03:/usr/share/elasticsearch/data
     networks:
-      - elastic
+      - kafka-clients-net
 
 volumes:
   data01:
-    driver: local
   data02:
-    driver: local
   data03:
-    driver: local
 
 networks:
-  elastic:
-    driver: bridge
+  kafka-clients-net:
+    external: true
