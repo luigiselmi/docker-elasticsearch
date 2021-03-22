@@ -1,16 +1,21 @@
 version: '3.2'
 services:
-    elasticsearch:
-        image: lgslm/elasticsearch:v1.0.0
-        hostname: elasticsearch
-        environment:
-            - discovery.type=single-node
-        ports:
-            - "9200:9200"
-            - "9300:9300"
-        networks:
-          - kafka-clients-net
+  elasticsearch1:
+    image: lgslm/elasticsearch:v1.0.0
+    hostname: elasticsearch1
+    environment:
+      - discovery.type=single-node
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - es_volume:/usr/share/elasticsearch/data      
+    networks:
+      - kafka-clients-net
+
+volumes:
+  es_volume:
 
 networks:
-        kafka-clients-net:
-            external: true
+  kafka-clients-net:
+    external: true
