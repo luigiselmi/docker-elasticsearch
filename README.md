@@ -76,3 +76,5 @@ and get the response
 The service can be started using the docker-compose file
 
     $ docker-compose up -d
+
+The index is saved in a local volume so that it will still be available in case the container is stopped and restarted.
