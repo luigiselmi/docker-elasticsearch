@@ -1,4 +1,4 @@
-version: '2.2'
+version: '3.2'
 services:
   es01:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
@@ -6,18 +6,12 @@ services:
     environment:
       - node.name=es01
       - cluster.name=es-docker-cluster
-      - discovery.seed_hosts=es02,es03
-      - cluster.initial_master_nodes=es01,es02,es03
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-    volumes:
-      - data01:/usr/share/elasticsearch/data
+      - discovery.seed_hosts=es02
+      - cluster.initial_master_nodes=es01,es02
+      - network.publish_host=es01
     ports:
       - 9200:9200
+      - 9300:9300
     networks:
       - kafka-clients-net
   es02:
@@ -26,41 +20,11 @@ services:
     environment:
       - node.name=es02
       - cluster.name=es-docker-cluster
-      - discovery.seed_hosts=es01,es03
-      - cluster.initial_master_nodes=es01,es02,es03
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-    volumes:
-      - data02:/usr/share/elasticsearch/data
+      - discovery.seed_hosts=es01
+      - cluster.initial_master_nodes=es01,es02
+      - network.publish_host=es02
     networks:
       - kafka-clients-net
-  es03:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
-    container_name: es03
-    environment:
-      - node.name=es03
-      - cluster.name=es-docker-cluster
-      - discovery.seed_hosts=es01,es02
-      - cluster.initial_master_nodes=es01,es02,es03
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-    volumes:
-      - data03:/usr/share/elasticsearch/data
-    networks:
-      - kafka-clients-net
-
-volumes:
-  data01:
-  data02:
-  data03:
 
 networks:
   kafka-clients-net:
