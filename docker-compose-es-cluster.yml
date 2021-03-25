@@ -17,11 +17,11 @@
 version: '3.2'
 services:
   es01:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
+    image: lgslm/elasticsearch:v1.0.0
     container_name: es01
     environment:
       - node.name=es01
-      - cluster.name=es-docker-cluster
+      - cluster.name=es-cluster
       - discovery.seed_hosts=es02,es03
       - cluster.initial_master_nodes=es01,es02,es03
       - network.publish_host=es01
@@ -35,7 +35,7 @@ services:
     container_name: es02
     environment:
       - node.name=es02
-      - cluster.name=es-docker-cluster
+      - cluster.name=es-cluster
       - discovery.seed_hosts=es01,es03
       - cluster.initial_master_nodes=es01,es02,es03
       - network.publish_host=es02
@@ -46,7 +46,7 @@ services:
     container_name: es03
     environment:
       - node.name=es03
-      - cluster.name=es-docker-cluster
+      - cluster.name=es-cluster
       - discovery.seed_hosts=es01,es02
       - cluster.initial_master_nodes=es01,es02,es03
       - network.publish_host=es03
