@@ -1,4 +1,4 @@
-# This docker-compose file can be used to deploy a cluster of thee 
+# This docker-compose file can be used to deploy a cluster of three 
 # Elasticsearch nodes on a Docker swarm.
 #
 # $ docker stack deploy -c docker-compose-es-cluster.yml es-stack
