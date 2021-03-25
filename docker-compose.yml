@@ -1,30 +1,20 @@
+#
+# Starts a container with Elasticsearch in single node
+#
 version: '3.2'
 services:
   es1:
     image: lgslm/elasticsearch:v1.0.0
     environment:
-      - discovery.seed_host=es2:9300
+      - discovery.type=single-node
       - node.name=es1
       - cluster.name=es-cluster
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ports:
       - "9200:9200"
+      - "9300:9300"
     volumes:
       - es_volume:/usr/share/elasticsearch/data      
-    networks:
-      - kafka-clients-net
-
-  es2:
-    image: lgslm/elasticsearch:v1.0.0
-    environment:
-      - discovery.seed_host=es1:9300
-      - node.name=es2
-      - cluster.name=es-cluster
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-    ports:
-      - "9201:9200"
-    volumes:
-      - es_volume:/usr/share/elasticsearch/data
     networks:
       - kafka-clients-net
 
