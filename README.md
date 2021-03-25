@@ -54,7 +54,7 @@ container
 
     $ curl -XPOST 'http://localhost:9200/thessaloniki/_doc' -H "Content-Type: application/json" -d @fcd-data.json
 
-In case the container is not a local container we must use its service name or hostname. The example data file contains two records 
+In case the container is not a local container we must use its service name or hostname. A record looks like the following  
 
 ``` 
 {
@@ -79,7 +79,8 @@ that is, records that cover the area of Thessaloniki and the Halkidiki peninsula
 
     $ curl 'http://localhost:9200/thessaloniki/_search?q=geohash:sx0*&pretty'
 
-One other common query is to know the number of records with a field that contains a certain value, e.g. geohash=sx0* 
+One other common query is to know the number of records with a field that contains a certain value, e.g. geohash=sx0*, as in the previous 
+request
 
     $ curl "http://localhost:9200/thessaloniki/_count?q=geohash:sx0*"
 
@@ -88,5 +89,20 @@ The Elasticsearch single-node container can also be started using the docker-com
 
     $ docker-compose up -d
 
-The index is saved in a local volume so that it will still be available in case the container is stopped and restarted.
+The index will be saved in a local volume so that it will still be available in case the container is stopped and restarted. In order to 
+delete all the documents in a index we can use the Delete by query API request with the command
+
+    $  curl -XPOST 'http://localhost:9200/thessaloniki/_delete_by_query?pretty' -H "Content-Type: application/json" --data-binary @bulk-delete.json
+
+where the file bulk-delete.json contains the request
+```
+{
+  "query": {
+    "match_all": {}
+   }
+
+}
+
+```
+
 ## cluster
