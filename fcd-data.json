@@ -1,11 +1,14 @@
 {
   "geohash" : "sx0r",
-  "timestamp" : "2021-02-20 18:00:00",
+  "timestamp" : "2021-02-20 17:59:00",
   "location" : {
-      "lat": 42.12,
-      "lon": 12.25
+      "lat": 42.11,
+      "lon": 12.35
     },
-  "speed" : 42.50,
-  "orientation" : 180.5,
+  "speed" : 30.00,
+  "orientation" : 97.2,
   "count" : 1
 }
+
+
+
