@@ -3,7 +3,7 @@
 #
 # $ docker build -t lgslm/elasticsearch:v1.0.0 .
 #
-# To run a container in detached mode execute the command
+# To run a container with Elasticsearch in single node execute the command
 # 
 # $ docker run --rm -d --name elasticsearch --network kafka-clients-net -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" lgslm/elasticsearch:v1.0.0 
 #
@@ -11,7 +11,7 @@
 #
 # $ docker exec -it elasticsearch bash
 #
-# The base image of elasticsearch:7.0.1 is centos:8.
+# The base image of elasticsearch:7.10.1 is centos:8.
 FROM elasticsearch:7.10.1
 
 MAINTAINER Luigi Selmi <luigi@datiaperti.it>
@@ -19,7 +19,7 @@ MAINTAINER Luigi Selmi <luigi@datiaperti.it>
 # Install nano for editing
 RUN yum install -y nano
 
-# copy files in /usr/share/elasticsearch
+# copy files to create the thessaloniki index in /usr/share/elasticsearch
 COPY healthcheck .
 COPY thessaloniki-settings.json .
 COPY elasticsearch-startup.sh .
