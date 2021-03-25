@@ -1,0 +1,7 @@
+{ "index" : { "_index" : "thessaloniki", "_id" : "1" } }
+{ "geohash" : "sx0r", "timestamp" : "2021-02-20 18:00:00", "location" : {"lat": 42.12, "lon": 12.25}, "speed" : 42.50, "orientation" : 180.5, "count" : 1 }
+{ "index" : { "_index" : "thessaloniki", "_id" : "2" } }
+{ "geohash" : "sx0q", "timestamp" : "2021-02-20 18:02:00", "location" : {"lat": 42.13, "lon": 12.22}, "speed" : 10.50, "orientation" : 90.0, "count" : 0 }
+
+
+
