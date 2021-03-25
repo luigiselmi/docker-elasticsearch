@@ -100,7 +100,6 @@ where the file bulk-delete.json contains the request
   "query": {
     "match_all": {}
    }
-
 }
 
 ```
