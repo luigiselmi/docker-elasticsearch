@@ -146,3 +146,4 @@ In our case we should have a cluster of three nodes with 3 shards (2 replicas) a
   "active_shards_percent_as_number" : 100.0
 }
 ```
+We can now index data and make queries from any of the cluster nodes like in the single-node case. 
