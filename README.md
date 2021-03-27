@@ -105,3 +105,19 @@ where the file bulk-delete.json contains the request
 ```
 
 ## cluster
+As an example we provide the docker-compose file to create a cluster of three Elasticsearch nodes to be deployed on three different servers 
+as Docker containers. In the first container we use the image built on top of the official Elasticsearch Docker image, version 7.10.1, that 
+contains the script to create the index we used before. The other two container use the official image. The configuration has been tested 
+on a cluster of three Amazon EC2 server instances (t3.medium: 2 vCPU, 4 GB mem, 16 GB SSD storage). Docker Engine and docker-compose must be 
+installed on each EC2 instance. The container can be managed using Docker in swarm mode. The setup of a Docker swarm is described in the [Docker
+website](https://docs.docker.com/engine/swarm/) or more briefly [here](https://github.com/luigiselmi/docker-zookeeper#quorum-mode-cluster).
+One important setting before running the containers is to set the value of the virtual memory dedicated to a shard to at least 262144 as
+recommended on the [Elasticsearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/7.x/vm-max-map-count.html). The 
+virtual memory can be set on each instance using the command
+
+    $ sudo sysctl -w vm.max_map_count=262144       
+ 
+or by setting the variable in /etc/sysctl.conf. When the instanes are available we have to just install the Docker images used in the 
+docker-compose file and finally deploy the stack of services using Docker in swarm mode from the master
+
+    $ docker stack deploy -c docker-compose-es-cluster.yml es-stack
