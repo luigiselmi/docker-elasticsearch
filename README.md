@@ -109,7 +109,7 @@ As an example we provide the docker-compose file to create a cluster of three El
 as Docker containers. In the first container we use the image built on top of the official Elasticsearch Docker image, version 7.10.1, that 
 contains the script to create the index we used before. The other two container use the official image. The configuration has been tested 
 on a cluster of three Amazon EC2 server instances (t3.medium: 2 vCPU, 4 GB mem, 16 GB SSD storage). Docker Engine and docker-compose must be 
-installed on each EC2 instance. The container can be managed using Docker in swarm mode. The setup of a Docker swarm is described in the [Docker
+installed on each EC2 instance. The containers can be managed using Docker in swarm mode. The setup of a Docker swarm is described in the [Docker
 website](https://docs.docker.com/engine/swarm/) or more briefly [here](https://github.com/luigiselmi/docker-zookeeper#quorum-mode-cluster).
 One important setting before running the containers is to set the value of the virtual memory dedicated to a shard to at least 262144 as
 recommended on the [Elasticsearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/7.x/vm-max-map-count.html). The 
@@ -121,3 +121,28 @@ or by setting the variable in /etc/sysctl.conf. When the instanes are available 
 docker-compose file and finally deploy the stack of services using Docker in swarm mode from the master
 
     $ docker stack deploy -c docker-compose-es-cluster.yml es-stack
+
+We can do an health check of the cluster by executing an http request from any of the cluster nodes
+
+   $ curl -XGET 'http://localhost:9200/_cluster/health?pretty'
+
+In our case we should have a cluster of three nodes with 3 shards (2 replicas) as shown in the response
+```
+{
+  "cluster_name" : "es-cluster",
+  "status" : "green",
+  "timed_out" : false,
+  "number_of_nodes" : 3,
+  "number_of_data_nodes" : 3,
+  "active_primary_shards" : 1,
+  "active_shards" : 3,
+  "relocating_shards" : 0,
+  "initializing_shards" : 0,
+  "unassigned_shards" : 0,
+  "delayed_unassigned_shards" : 0,
+  "number_of_pending_tasks" : 0,
+  "number_of_in_flight_fetch" : 0,
+  "task_max_waiting_in_queue_millis" : 0,
+  "active_shards_percent_as_number" : 100.0
+}
+```
