@@ -146,4 +146,8 @@ In our case we should have a cluster of three nodes with 3 shards (2 replicas) a
   "active_shards_percent_as_number" : 100.0
 }
 ```
+The master node can be seen by sending the request following request to any cluster node
+
+    $ curl 'http://localhost:9200/_cluster/state/master_node,nodes?pretty'
+
 We can now index data and make queries from any of the cluster nodes like in the single-node case. 
