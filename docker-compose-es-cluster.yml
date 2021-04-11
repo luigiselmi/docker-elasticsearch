@@ -52,7 +52,14 @@ services:
       - network.publish_host=es03
     networks:
       - kafka-clients-net
-
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.10.1
+    depends_on:
+      - es01
+    ports:
+      - "5601:5601"
+    networks:
+      - kafka-clients-net 
 networks:
   kafka-clients-net:
     external: true
